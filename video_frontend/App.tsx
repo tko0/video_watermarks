@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, ActivityIndicator, TouchableOpacity, StyleSheet, Dimensions, Linking } from 'react-native';
 import { pick } from '@react-native-documents/picker';
 import axios from 'axios';
+import IP from '@env';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const App = () => {
   const [videoUri, setVideoUri] = useState<string | null>(null);
@@ -38,13 +39,13 @@ const App = () => {
       setLoading(true);
       console.log("Uploading video...");
 
-      const { data } = await axios.post('http://192.168.1.14:5001/api/videos/upload', formData, {
+      const { data } = await axios.post(`http://${IP}:5001/api/videos/upload`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
       console.log("Video uploaded, response data:", data);
 
-      const processRes = await axios.get(`http://192.168.1.14:5001/api/videos/process/${data.filename}`);
+      const processRes = await axios.get(`http://${IP}:5001//api/videos/process/${data.filename}`);
 
       console.log("Processed video response:", processRes.data);
 
