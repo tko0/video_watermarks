@@ -50,7 +50,7 @@ const App = () => {
       console.log("Processed video response:", processRes.data);
 
       if (processRes.data.processedFilePath) {
-        const processedVideoPath = `http://192.168.1.14:5001/video/${processRes.data.processedFilePath.split('/').pop()}`;
+        const processedVideoPath = `http://${IP}:5001/video/${processRes.data.processedFilePath.split('/').pop()}`;
         console.log('Processed Video Path:', processedVideoPath);
 
         setProcessedVideoUrl(processedVideoPath); // Set the URL
